@@ -2,6 +2,7 @@ package com.mjc.school.repository;
 
 import com.mjc.school.repository.model.Author;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AuthorRepository extends BaseRepository<Author, Long> {
