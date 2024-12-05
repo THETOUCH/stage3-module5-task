@@ -88,6 +88,13 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
         return authorService.update(updateRequest);
     }
 
+    @ApiOperation(value = "Update an author's details", notes = "This endpoint updates the details of an existing author.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully updated the author."),
+            @ApiResponse(code = 400, message = "Invalid author data provided."),
+            @ApiResponse(code = 404, message = "Author not found."),
+            @ApiResponse(code = 500, message = "Internal server error.")
+    })
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public AuthorDtoResponse patch(@PathVariable Long id, @RequestBody AuthorDtoRequest updateRequest) {
@@ -105,6 +112,13 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
     public void deleteById(@PathVariable Long id) {
         authorService.deleteById(id);
     }
+
+    @ApiOperation(value = "Get author by news ID", notes = "Retrieves author details associated with a specific news ID.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved author details"),
+            @ApiResponse(code = 404, message = "Author not found for the given news ID"),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
     @GetMapping("/{newsId}")
     @ResponseStatus(HttpStatus.OK)
     @CommandHandler(operation = 21)

@@ -88,6 +88,13 @@ public class CommentController implements BaseController<CommentDtoRequest, Comm
         return commentService.update(updateRequest);
     }
 
+    @ApiOperation(value = "Update an comment's details", notes = "This endpoint updates the details of an existing comment.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully updated the comment."),
+            @ApiResponse(code = 400, message = "Invalid comment data provided."),
+            @ApiResponse(code = 404, message = "Comment not found."),
+            @ApiResponse(code = 500, message = "Internal server error.")
+    })
     @PatchMapping
     @ResponseStatus(HttpStatus.OK)
     @CommandHandler(operation = 19)
@@ -107,6 +114,12 @@ public class CommentController implements BaseController<CommentDtoRequest, Comm
         commentService.deleteById(id);
     }
 
+    @ApiOperation(value = "Get comment by news ID", notes = "Retrieves comment details associated with a specific news ID.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved comment details"),
+            @ApiResponse(code = 404, message = "Comment not found for the given news ID"),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
     @GetMapping("/{newsId}")
     @ResponseStatus(HttpStatus.OK)
     @CommandHandler(operation = 22)

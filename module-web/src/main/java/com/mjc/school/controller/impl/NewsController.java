@@ -86,6 +86,13 @@ public class NewsController implements BaseController<NewsDtoRequest, NewsDtoRes
         return newsService.update(updateRequest);
     }
 
+    @ApiOperation(value = "Update an news's details", notes = "This endpoint updates the details of an existing news.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully updated the news."),
+            @ApiResponse(code = 400, message = "Invalid news data provided."),
+            @ApiResponse(code = 404, message = "news not found."),
+            @ApiResponse(code = 500, message = "Internal server error.")
+    })
     @PatchMapping
     @ResponseStatus(HttpStatus.OK)
     @CommandHandler(operation = 4)
@@ -105,6 +112,13 @@ public class NewsController implements BaseController<NewsDtoRequest, NewsDtoRes
         newsService.deleteById(id);
     }
 
+    @ApiOperation(value = "Get news by query parameters", notes = "Retrieves a list of news based on provided query parameters.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved news list"),
+            @ApiResponse(code = 400, message = "Invalid query parameters"),
+            @ApiResponse(code = 404, message = "No news found for the given query parameters"),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
     @CommandHandler(operation = 23)
     @GetMapping("/one-news")
     @ResponseStatus(HttpStatus.OK)

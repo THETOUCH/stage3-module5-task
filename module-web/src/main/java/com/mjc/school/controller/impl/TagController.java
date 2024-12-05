@@ -75,7 +75,13 @@ public class TagController implements BaseController<TagDtoRequest, TagDtoRespon
     public TagDtoResponse update(@PathVariable Long id, @RequestBody TagDtoRequest updateRequest) {
         return tagService.update(updateRequest);
     }
-
+    @ApiOperation(value = "Update an tag's details", notes = "This endpoint updates the details of an existing tag.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully updated the tag."),
+            @ApiResponse(code = 400, message = "Invalid tag data provided."),
+            @ApiResponse(code = 404, message = "tag not found."),
+            @ApiResponse(code = 500, message = "Internal server error.")
+    })
     @PatchMapping
     @ResponseStatus(HttpStatus.OK)
     @CommandHandler(operation = 14)
@@ -94,6 +100,12 @@ public class TagController implements BaseController<TagDtoRequest, TagDtoRespon
         tagService.deleteById(id);
     }
 
+    @ApiOperation(value = "Get tag by news ID", notes = "Retrieves tag details associated with a specific news ID.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved tag details"),
+            @ApiResponse(code = 404, message = "tag not found for the given news ID"),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
     @GetMapping("/{newsId}")
     @ResponseStatus(HttpStatus.OK)
     @CommandHandler(operation = 24)
